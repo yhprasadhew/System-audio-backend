@@ -4,7 +4,9 @@ import userRouter from './routes/userRoutes.js';
 import productRouter from './routes/productRoutes.js';
 import bodyParser from 'body-parser';
 import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
 
+dotenv.config();  //dotenv file eka load krgnnwa
 const app = express();
 
 app.use(express.json());
@@ -32,7 +34,7 @@ app.use((req, res, next) => {
 
 
 // MongoDB connection
-let mongoUrl = "mongodb+srv://admin:admin123@cluster0.wc3qyns.mongodb.net/mydb?retryWrites=true&w=majority";
+let mongoUrl = process.env.MONGO_URL;
 
 mongoose.connect(mongoUrl)
 .then(() => console.log("MongoDB Connected successfully ✅ "))
