@@ -5,6 +5,7 @@ import productRouter from './routes/productRoutes.js';
 import bodyParser from 'body-parser';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
+import reviewRouter from './routes/reviewRoute.js';
 
 dotenv.config();  //dotenv file eka load krgnnwa
 const app = express();
@@ -28,9 +29,11 @@ app.use((req, res, next) => {
         });
     }
 
-    console.log(token);  
+    ;  
     next();
 });
+
+
 
 
 // MongoDB connection
@@ -42,11 +45,16 @@ mongoose.connect(mongoUrl)
 
 app.use('/api/users', userRouter);
 app.use('/api/products', productRouter);
+app.use('/api/reviews', reviewRouter);
 
-// Server
+// Serve
 app.listen(3000, () => {
     console.log('Server is running on port 3000');
 });
 
-//"email": "ganindu@example.com",
-//"password": "malith123"
+
+  //"email": "prasad@example.com",    admin
+  //  "password": "123",
+
+// "email": "john.doe@example.com",
+   // "password": "12345678",

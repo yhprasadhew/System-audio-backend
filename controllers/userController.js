@@ -3,7 +3,7 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 
-
+dotenv.config()
 export function registerUser(req, res) {
 
 const data = req.body
@@ -40,7 +40,8 @@ export function loginUser(req, res) {
                     firstName : user.firstName,
                     lastName : user.lastName,
                      email : user.email,
-                     role : user.role
+                     role : user.role,
+                     profilepicture : user.profilepicture 
                 },process.env.JWT_SECRET );
 
                 res.json({ message: "Login successful ✅ ", token: token });
