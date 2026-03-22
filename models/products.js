@@ -31,11 +31,11 @@ const productSchema = new mongoose.Schema({
         type: Boolean,
         required: true,
         default: true
-        
+
     },image: {
-        type: String,
+        type: [String],
         required: true,
-        default: "https://www.pngall.com/wp-content/uploads/5/Product-Image-Placeholder-PNG-Picture.png"
+        default: ["https://www.pngall.com/wp-content/uploads/5/Product-Image-Placeholder-PNG-Picture.png"]
     }
 
 });
