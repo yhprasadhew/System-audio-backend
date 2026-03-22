@@ -52,7 +52,21 @@ export function loginUser(req, res) {
             
              }
         });
+    }
+    
+         export function  IsItAdmin(req) {   //vid8
+            
+             let isadmin = false;                                            
+            if(req.user != null ){
+                
+                if(req.user.role === "admin"){
+                    isadmin = true;
+                }
+            
+        }
+            return isadmin;
+        }
 
 
-} 
+
 
