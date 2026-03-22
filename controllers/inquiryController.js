@@ -1,6 +1,6 @@
 import express from 'express';
 import Inquiry from '../models/inquiry.js'; 
-import { IsItCustomer } from './userController.js';
+import { IsItAdmin, IsItCustomer } from './userController.js';
 
 export async function addInquiry(req, res) {
     try {
@@ -46,17 +46,77 @@ export async function addInquiry(req, res) {
     }
 }
 
-export async function Inquiries(req, res) {
+export async function getInquiries(req, res) {
     try{
         if(IsItCustomer(req)){
             const inquiries = await Inquiry.find({ email: req.user.email });
-            return res.json(inquiries);
-        }
+            res.json(inquiries);
+            return;
+        }else if(IsItAdmin(req)){
+            const inquiries = await Inquiry.find();
+            res.json(inquiries);
+            return;
+         }else{
+            return res.status(403).json({
+                message: "You are not authorized to view inquiries"
+            });
+         }
+
+        
 
     }catch(e){
         res.status(500).json({
             message: "Error fetching inquiries"
            
+        });
+    }
+}
+
+   export async function deleteInquiry(req, res) {
+    try {
+        const id = req.params.id;
+
+        // 🔹 ADMIN can delete any inquiry
+        if (IsItAdmin(req)) {
+            await Inquiry.findByIdAndDelete(id);
+
+            return res.json({
+                message: "Inquiry deleted successfully ✅"
+            });
+        }
+
+        // 🔹 CUSTOMER can delete only their own inquiry
+        if (IsItCustomer(req)) {
+            const inquiry = await Inquiry.findById(id);
+
+            if (!inquiry) {
+                return res.status(404).json({
+                    message: "Inquiry not found"
+                });
+            }
+
+            if (inquiry.email !== req.user.email) {
+                return res.status(403).json({
+                    message: "You are not authorized to delete this inquiry"
+                });
+            }
+
+            await Inquiry.findByIdAndDelete(id);
+
+            return res.json({
+                message: "Inquiry deleted successfully ✅"
+            });
+        }
+
+        // 🔹 Unauthorized
+        return res.status(403).json({
+            message: "You are not authorized to delete inquiries"
+        });
+
+    } catch (error) {
+        res.status(500).json({
+            error: "Error deleting inquiry",
+            details: error.message
         });
     }
 }
