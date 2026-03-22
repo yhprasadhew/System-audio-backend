@@ -1,5 +1,7 @@
 import product from '../models/products.js';
 
+
+
 export function addProduct(req, res) {
    
     console.log(req.user);
@@ -26,4 +28,18 @@ export function addProduct(req, res) {
         .catch((error) => {
             res.status(500).json({ error: "Error adding product" });
         });
-}
+
+
+        //get products
+    }
+        export async function getProducts(req, res) {
+            try{
+                const products = await product.find();
+                res.json(products);
+                
+            } catch (error) {
+                res.status(500).json({ message: "failed to get products" });
+
+            }
+        
+        }
