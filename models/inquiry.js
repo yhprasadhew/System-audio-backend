@@ -1,4 +1,4 @@
-import { response } from "express";
+
 import mongoose from "mongoose";
 
 const inquirySchema = new mongoose.Schema({ 
@@ -12,7 +12,7 @@ const inquirySchema = new mongoose.Schema({
     email: {
         type: String,
         required: true ,
-        unique: true
+        
     },
     message : {
         type: String,

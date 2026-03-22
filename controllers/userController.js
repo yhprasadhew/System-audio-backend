@@ -41,7 +41,9 @@ export function loginUser(req, res) {
                     lastName : user.lastName,
                      email : user.email,
                      role : user.role,
-                     profilepicture : user.profilepicture 
+                     profilepicture : user.profilepicture ,
+                    phoneNumber: user.phoneNumber  
+
                 },process.env.JWT_SECRET );
 
                 res.json({ message: "Login successful ✅ ", token: token });

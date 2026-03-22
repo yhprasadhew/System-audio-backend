@@ -6,6 +6,7 @@ import bodyParser from 'body-parser';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 import reviewRouter from './routes/reviewRoute.js';
+import inquiryRouter from './routes/inquiryRoute.js';
 
 dotenv.config();  //dotenv file eka load krgnnwa
 const app = express();
@@ -46,6 +47,8 @@ mongoose.connect(mongoUrl)
 app.use('/api/users', userRouter);
 app.use('/api/products', productRouter);
 app.use('/api/reviews', reviewRouter);
+
+app.use('/api/inquiries', inquiryRouter);
 
 // Serve
 app.listen(3000, () => {
