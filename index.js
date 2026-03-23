@@ -50,6 +50,7 @@ app.use('/api/reviews', reviewRouter);
 
 app.use('/api/inquiries', inquiryRouter);
 
+
 // Serve
 app.listen(3000, () => {
     console.log('Server is running on port 3000');
