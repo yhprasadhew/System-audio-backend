@@ -11,13 +11,11 @@ import inquiryRouter from './routes/inquiryRoute.js';
 dotenv.config();  //dotenv file eka load krgnnwa
 const app = express();
 
-
 app.use(express.json());
 app.use(bodyParser.json());
 
 
-
-// ************* middleware ekaki ****
+//  middleware ekaki ****
 
 app.use((req, res, next) => {  
     let token = req.header("Authorization");

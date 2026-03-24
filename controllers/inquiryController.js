@@ -9,7 +9,6 @@ export async function addInquiry(req, res) {
                 message: "You are not authorized to add inquiries"
             });
         }
-
         const data = req.body;
 
         // attach user details
