@@ -1,10 +1,9 @@
 import product from '../models/products.js';
 import { IsItAdmin } from './userController.js';
 
-
 export function addProduct(req, res) {
    
-    
+
     if(req.user == null){
         res.status(401).json({
              message: "please login and try again" });
