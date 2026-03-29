@@ -2,6 +2,7 @@ import express from 'express';
 import mongoose from 'mongoose';
 import userRouter from './routes/userRoutes.js';
 import productRouter from './routes/productRoutes.js';
+import cors from 'cors';    
 import bodyParser from 'body-parser';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
@@ -13,7 +14,7 @@ const app = express();
 
 app.use(express.json());
 app.use(bodyParser.json());
-
+app.use(cors());
 
 //  middleware ekaki ****
 
