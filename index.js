@@ -17,7 +17,7 @@ app.use(bodyParser.json());
 
 app.use(cors());
 
-//  middleware ekaki ****
+//  middleware ekaki pp ****
 
 app.use((req, res, next) => {  
     let token = req.header("Authorization");
